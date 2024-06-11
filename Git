@@ -1,0 +1,33 @@
+Q) Lets say your organization has github and bitbucket to store code, you have cloned a repo onto your local and changed directory name. after some days one of your team members asks you to share clone link, how would you provide the same?
+A) git remote get-url origin
+
+Q) I have shell script to delete particular dependency ( repo is maven project ). before running the script i need to clone repo to my local, here point to note i should only clone master branch and only last commit ( last commit has all the code ) how would you do this?
+A) git clone --depth 1 --branch master <repository-url>
+
+Q) What is submodule and why we need submodule?
+A) A Git submodule is a repository embedded within another Git repository.
+Syntax: git submodule add <repository-url> <path-to-submodule>
+
+Q) Lets say you have changed 5 files a,b,c,d and e in a repo and you did git add ., now all the files are in staging area, now i decided not to commit file d. how would delete it from staging area?
+A) git restore --staged d
+
+Q) What is the difference between Git and Github?
+A) Git is the version control system, while github is a hosting platform for repositories.
+
+Q) How do you resolve merge conflicts in Git?
+A) To resolve conflicts manually editing the conflicting files.
+
+Q) What is git reset? Types of reset?
+A) Git reset is a Git command used to undo changes in the working directory and the staging area.
+Syntax: Git reset <commit id> reset --hard
+Three types: 1) Hard 2) Mixed 3) Soft
+
+Q) How to delete local branch and remote branch in git ?
+A) git branch –d <branch name> & Git push origin :<branch name>
+
+Q) Difference between git diff and git status ?
+A) git status: Provides an overview of the repository's state, showing which files are staged, unstaged, or untracked.
+git diff: Shows detailed differences between files in the working directory, the staging area, and commits.
+
+Q) What are hooks in git?
+A) Hooks are scripts that run automatically when certain events happen in a repository. Default hooks file location in .git folder.
