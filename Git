@@ -1,3 +1,7 @@
+Q) What is the difference between Git and Github?
+A)Git is a version control system install on local machine.
+Github is a hosting platform.
+
 Q) Lets say your organization has github and bitbucket to store code, you have cloned a repo onto your local and changed directory name. after some days one of your team members asks you to share clone link, how would you provide the same?
 A) git remote get-url origin
 
