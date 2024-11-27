@@ -1,4 +1,4 @@
-What is the difference between the `taint` and `import` commands in Terraform?
+Q1) What is the difference between the `taint` and `import` commands in Terraform?
 Import:
 
 provider "aws" {
