@@ -1,0 +1,22 @@
+What is the difference between the `taint` and `import` commands in Terraform?
+Import:
+
+provider "aws" {
+  region = "us-east-1"
+}
+
+import {
+  id = "i-0573333333"
+  to = aws_instance.example
+}
+
+terraform init
+# To get hcl code from AWS
+terraform plan --generate-config-out=file.tf
+# copy code from file.tf paste in place of import block and remove import block then apply below command to get statefile
+terraform import aws_instance.example <instance id>
+terraform plan
+# you will get message "No changes. Your infrastructure matches the configuration." it means your terrafom code and aws resources are synced.
+
+Taint:
+Terraform taint resource.id manually marks the resource as tainted in the state file. So when you run terraform apply the next time, the resource will be destroyed and recreated.
