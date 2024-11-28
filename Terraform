@@ -146,4 +146,17 @@ Some of the command mentioned below used in terraform workspace.
   terraform workspace delete dev
   terraform state list: it is used to show which resource created in specific workspace
 
+Q15) Explain the difference between a Terraform resource and a data source.
+Ans) Represents existing infrastructure that Terraform queries or fetches information about.
+
+data "aws_ami" "example" {
+  most_recent = true
+  owners      = ["amazon"]
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-*"]
+  }
+}
+Terraform fetches the details of the most recent Amazon Linux 2 AMI but does not create or manage it.
+
 
