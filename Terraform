@@ -20,3 +20,130 @@ terraform plan
 
 Taint:
 Terraform taint resource.id manually marks the resource as tainted in the state file. So when you run terraform apply the next time, the resource will be destroyed and recreated.
+
+Q2) How do you manage dependencies between different resources in Terraform configurations?
+Ans) Explicitly using the depends_on argument.
+
+Q3) How does Terraform manage state, and why is state management crucial?
+Ans) Terraform storing information about infrastructure resources, terraform.tfstate file to track resource mappings and changes.
+
+Q4) What role do providers play in Terraform, and how do they aid in managing infrastructure?
+Ans) Terraform aid in interaction with platforms.
+
+Q5) What techniques can be used to enable parallelism in Terraform operations and enhance performance?
+Ans) Parallelism controls the number of concurrent resource operations
+
+resource "aws_s3_bucket" "example" {
+  count = 20
+  bucket = "example-bucket-${count.index}"
+}
+terraform apply -parallelism=20
+
+Q6) What are remote backends in Terraform, and what are the benefits of using them?
+
+Q7) What methods are available to prevent concurrent modifications to Terraform state?
+Ans) To prevent concurrent modifications to Terraform state, you can use state locking mechanisms provided by remote backends
+
+terraform {
+  backend "s3" {
+    bucket         = "my-terraform-state"
+    key            = "prod/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "terraform-locks" # Enables locking
+  }
+}
+
+Q8) Why we don't use git for remote backend instead use S3 or other storage?
+Ans) Using Git for storing Terraform state is not recommended because Git is not designed for managing mutable, binary files like Terraform state files.
+
+Q9) Can you explain the differences between the `local-exec` and `remote-exec` provisioners in Terraform?
+Ans) 
+Local-exec:
+resource "aws_instance" "example" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+
+  provisioner "local-exec" {
+    command = "echo 'Instance created' > instance.log"
+  }
+}
+Executes on the machine running Terraform (local machine).
+
+Remote exec:
+resource "aws_instance" "example" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo apt-get update",
+      "sudo apt-get install -y nginx"
+    ]
+    connection {
+      type     = "ssh"
+      user     = "ubuntu"
+      private_key = file("~/.ssh/id_rsa")
+      host     = self.public_ip
+    }
+  }
+}
+
+Executes on the target resource (e.g., EC2 instance).
+
+Q10) How can Terraform state be securely managed across multiple environments or teams?
+Ans) Store the Terraform state file in a remote backend like AWS S3, Azure Blob Storage, or Terraform Cloud to centralize state management. Remote backends provide enhanced security, scalability, and access control.
+
+Q11) How do you detect and address drift in Terraform-managed infrastructure?
+Ans) terraform refresh (update the terraform state file)
+
+Q12) Could you explain the differences between the `count` and `for_each` meta-arguments in Terraform?
+Ans) for_each can applied only on collections like maps or sets (as opposed to count that can be applied on lists).
+     for_each helps to deal with the limitation of count which isn't optimal for use cases of modifying lists.
+     for_each supports inline blocks as opposed to count.
+
+for_each:
+
+resource "aws_instance" "example" {
+  for_each      = {
+    "web"    = "ami-0c55b159cbfafe1f0"
+    "db"     = "ami-0d5d9d301c2eea1f0"
+    "cache"  = "ami-0b5d9d301c2eea1f1"
+  }
+  
+  ami           = each.value
+  instance_type = "t2.micro"
+  
+  tags = {
+    Name = each.key
+  }
+}
+
+count:
+
+resource "aws_instance" "example" {
+  count         = 3  # Create 3 EC2 instances
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+  
+  tags = {
+    Name = "Instance ${count.index + 1}"
+  }
+}
+
+Q13) What are the best practices for managing secrets or sensitive information within Terraform configurations?
+
+1- Environment variable
+2- Encrypting secrets
+3- Cloud based service e.g. AWS Secret Manager
+
+Q14) Can you describe what workspaces are in Terraform and how they assist with infrastructure management?
+Ans) It provide logical segregation when dealing with multiple environment, in other words it is a branch to maintain state file.
+Some of the command mentioned below used in terraform workspace.
+  terraform workspace list
+  terraform workspace new dev
+  terraform workspace show
+  terraform select dev
+  terraform workspace delete dev
+  terraform state list: it is used to show which resource created in specific workspace
+
+
