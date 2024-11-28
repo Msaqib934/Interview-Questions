@@ -54,7 +54,13 @@ terraform {
 }
 
 Q8) Why we don't use git for remote backend instead use S3 or other storage?
-Ans) Using Git for storing Terraform state is not recommended because Git is not designed for managing mutable, binary files like Terraform state files.
+
+Ans) 1- Using Git for storing Terraform state is not recommended because Git is not designed for managing mutable, binary files like Terraform state files.
+     2- tfstate contains credentials in plain text. You don't want to put it in publicly shared location
+     3- tfstate shouldn't be modified concurrently so putting it in a shared location available for everyone with "write" permissions might lead to issues. (Terraform remote state doesn't has this problem).
+     4- tfstate is an important file. As such, it might be better to put it in a location that has regular backups and good security.
+
+As such, tfstate shouldn't be stored in git repositories. secured storage such as secured buckets, is a better option.
 
 Q9) Can you explain the differences between the `local-exec` and `remote-exec` provisioners in Terraform?
 Ans) 
