@@ -159,4 +159,12 @@ data "aws_ami" "example" {
 }
 Terraform fetches the details of the most recent Amazon Linux 2 AMI but does not create or manage it.
 
+Q16) How do you manage sensitive information (like API keys) in Terraform configurations?
+Ans) Use secret management tools like:
+  1- HashiCorp Vault
+  2- AWS Secrets Manager
+  3- Azure Key Vault
+  4- GCP Secret Manager
+Retrieve secrets dynamically in your Terraform configuration using data sources.
 
+Q17) Explain how to create reusable modules in Terraform.
