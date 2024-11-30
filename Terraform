@@ -174,3 +174,9 @@ Ans) Use secret management tools like:
 Retrieve secrets dynamically in your Terraform configuration using data sources.
 
 Q17) Explain how to create reusable modules in Terraform.
+
+module "vpc module" {
+  source = "<repo link> OR <directory path>
+}
+
+variable defined in terraform soruce code but not tfvars. It is defined in module.
