@@ -39,3 +39,6 @@ A) Hooks are scripts that run automatically when certain events happen in a repo
 Q) 9.You accidentally committed sensitive information to a Git repository. Describe the steps you would take to remove the sensitive information from the repository's history.
 A) git filter-branch --force --index-filter "git rm --cached --ignore-unmatch ./secrets.txt" --prune-empty --tag-name-filter cat -- --all
 
+Q) 10.One of your team members accidentally deleted a critical branch in a Git repository. Describe the steps you would take to recover the deleted branch.
+A) Git Reflog
+log is public record and reflog is private records of commits
