@@ -42,3 +42,9 @@ A) git filter-branch --force --index-filter "git rm --cached --ignore-unmatch ./
 Q) 10.One of your team members accidentally deleted a critical branch in a Git repository. Describe the steps you would take to recover the deleted branch.
 A) Git Reflog
 log is public record and reflog is private records of commits
+
+Q) What is origin?
+A) Origin is a name of link between remote and local repository.
+lets if someone forked our repo than we can access to forked repo by local by creating new link any name like git remote add friend <forked repo link>
+so in two links create one is origin and another is friend that is linked to forked repo.
+we can check this by git remote -v
