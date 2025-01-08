@@ -35,3 +35,7 @@ git diff: Shows detailed differences between files in the working directory, the
 
 Q) What are hooks in git?
 A) Hooks are scripts that run automatically when certain events happen in a repository. Default hooks file location in .git folder.
+
+Q) 9.You accidentally committed sensitive information to a Git repository. Describe the steps you would take to remove the sensitive information from the repository's history.
+A) git filter-branch --force --index-filter "git rm --cached --ignore-unmatch ./secrets.txt" --prune-empty --tag-name-filter cat -- --all
+
