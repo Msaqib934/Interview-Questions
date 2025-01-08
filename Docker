@@ -1,0 +1,2 @@
+Q) What happens when you delete the /var/lib/docker/overlay directory on a Docker host?
+A) The /var/lib/docker/overlay directory is part of the Docker storage system and is used for storing the overlay filesystem (the layers of Docker images) for containers. Each container running on the host has its own filesystem that is built on top of a set of image layers. If this directory is deleted, the filesystem for all running or stopped containers will be lost.
