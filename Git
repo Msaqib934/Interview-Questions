@@ -48,3 +48,21 @@ A) Origin is a name of link between remote and local repository.
 lets if someone forked our repo than we can access to forked repo by local by creating new link any name like git remote add friend <forked repo link>
 so in two links create one is origin and another is friend that is linked to forked repo.
 we can check this by git remote -v
+
+Q) What do you mean by head in terms of git and also tell the number of heads that can present in a repository?
+A) HEAD is a pointer to the latest commit in the currently checked-out branch.
+   A repository can have multiple heads (one per branch), but there is only one active HEAD at a time, which represents the branch currently being worked on.
+
+Q) What has to be run to squash multiple commit (last N) into a single commit?
+A) Squash in Git combines multiple commits into a single commit to keep the history clean and concise
+   git rebase -i HEAD~N
+   i=interactive
+   HEAD~N=how many commits merges from HEAD to N number.
+
+Q) What is difference betwwen HEAD, Working Tree and Index in GIT?
+A) HEAD: The current commit or snapshot where your branch is pointing.
+   Working Tree: The actual files in your project directory that you edit.
+   Index (Staging Area): The intermediate area where changes are prepared before committing.
+
+Q) What is the difference between git status and git diff?
+A) git status shows the state of the working directory and staged changes, while git diff shows the differences between commits, working directory, and staging area.
