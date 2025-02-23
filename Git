@@ -66,3 +66,7 @@ A) HEAD: The current commit or snapshot where your branch is pointing.
 
 Q) What is the difference between git status and git diff?
 A) git status shows the state of the working directory and staged changes, while git diff shows the differences between commits, working directory, and staging area.
+
+Q) What is the difference between git pull and git clone?
+A) Git Clone: Copies all files, branches, and history.
+   Git Pull: Updates the current branch with remote changes.
